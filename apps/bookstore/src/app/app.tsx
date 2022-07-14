@@ -1,19 +1,33 @@
-import styled from 'styled-components';
-// import NxWelcome from './nx-welcome';
+import { Link, Redirect, Route } from 'react-router-dom';
+import { BooksFeature } from '@acme/books/feature';
 
-const StyledApp = styled.div`
-  // Your style here
-`;
+// importing the UI library into our App
+import {
+  GlobalStyles,
+  Header,
+  Main,
+  NavigationItem,
+  NavigationList
+} from '@acme/ui';
 
 export const App = () => {
   return (
-    <StyledApp>
-      {/* <NxWelcome title="bookstore" /> */}
-      <header>
-        <h1>Bookstore</h1>
-      </header>
-    </StyledApp>
+  <>
+    <GlobalStyles />
+    <Header>
+      <h1>Bookstore</h1>
+      <NavigationList>
+        <NavigationItem>
+          <Link to="/books">Books</Link>
+        </NavigationItem>
+      </NavigationList>
+    </Header>
+    <Main>
+      <Route path="/books" component={BooksFeature} />
+      <Route exact path="/" render={() => <Redirect to="/books" />} />
+    </Main>
+  </>
   );
-}
+};
 
 export default App;
